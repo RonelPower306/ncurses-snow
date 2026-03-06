@@ -1,0 +1,10 @@
+# ignore all .sh files.
+*.sh
+
+# ignore compilated 'snow' program...
+snow
+# but not the source file.
+!snow.c
+
+# ignore vscode folder.
+.vscode
