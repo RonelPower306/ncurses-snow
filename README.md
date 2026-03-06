@@ -1,6 +1,8 @@
 # ncurses-snow
 A simple C Ncurses program that simulates a snowy environment.
 
+![Snow with frame](images/snow_w_frame.png)
+
 ## What is this?
 This project is a terminal-based program that simulates a **snowy enviroment** (including **stacking snow**) using *Ncurses* and *UNICODE characters*.
 
