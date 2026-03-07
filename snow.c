@@ -6,7 +6,6 @@
 #include <locale.h>
 #include <wchar.h>
 #include <getopt.h>
-#include <panel.h>
 
 /* --- USER DEFINABLE PARAMETERS --- */
 
@@ -32,7 +31,6 @@ float snow_levels_max = 0.0f;       // Current highest snow column.
 float elapsed_time = 0.0f;          // Used for wind simulation.
 
 WINDOW *frame_win = NULL, *canvas_win = NULL;
-PANEL *frame_panel = NULL, *canvas_panel = NULL;
 
 // NOTE: when a flake's y coordinate is 0 it gets rendered at the bottom
 //  of the window (it has reached the ground)...
@@ -229,8 +227,6 @@ void draw_ground(WINDOW *win)
 WINDOW *create_frame()
 {
     WINDOW *frame_win = newwin(term_height, term_width, 0, 0);
-    if(do_draw_frame)
-        box(frame_win, 0, 0);
 
     return frame_win;
 }
@@ -261,14 +257,9 @@ void handle_resize()
     // Used to have a memory leak without these lines...
     delwin(canvas_win);
     delwin(frame_win);
-    free(canvas_panel);
-    free(frame_panel);
 
     canvas_win = create_canvas();
     frame_win = create_frame();
-
-    frame_panel = new_panel(frame_win);
-    canvas_panel = new_panel(canvas_win);
 }
 
 void level_ground()
@@ -354,13 +345,17 @@ int main(int argc, char *argv[])
 
         werase(canvas_win);
 
+        if(do_draw_frame)
+            box(frame_win, 0, 0);
+
         update_snow(DELTA_TIME);
         update_ground();
 
         draw_ground(canvas_win);
         draw_snow(canvas_win);
        
-        update_panels();
+        wnoutrefresh(frame_win);
+        wnoutrefresh(canvas_win);
         doupdate();
 
         if(snow_levels_max >= MAX_GROUND_LEVEL)

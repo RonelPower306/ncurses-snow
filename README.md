@@ -23,10 +23,9 @@ This projects requires the **Ncurses** library (more specifically **Ncursesw**) 
 - On **Debian/Ubuntu Linux**, the command should be `sudo apt-get install libncurses5-dev libncursesw5-dev`
 - On **Arch Linux**, use `yay -S ncurses`
 
-Then compile with: `gcc -Wall -o snow snow.c -DNCURSES_WIDECHAR=1 -lncursesw -lnpanel -lm -v`
+Then compile with: `gcc -Wall -o snow snow.c -DNCURSES_WIDECHAR=1 -lncursesw -lm`
 
-**NOTE**: Compilation and execution of this program have only been tested on an **Arch Linux** system. The *panel* library is automatically installed with the *yay* command as described [here](https://archlinux.org/packages/core/x86_64/ncurses/).
-The procedure may vary depending on your personal setup.
+**NOTE**: Compilation and execution of this program have only been tested on an **Arch Linux** system. The procedure may vary depending on your personal setup.
 
 ## Usage
 
